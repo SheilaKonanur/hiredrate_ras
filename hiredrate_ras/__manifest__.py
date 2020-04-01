@@ -44,6 +44,6 @@
     # only loaded in demonstration mode
     'qweb': [],
     'application': True,
-    'images': ['static/description/MatchAnalytic.gif'],
+    'images': ['static/description/banner.png'],
     'sequence': 1,
 }
