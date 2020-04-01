@@ -16,7 +16,7 @@
     'demo': [],
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'hr', 'hr_recruitment', 'web', 'portal', 'hiredrate_registry'],
+    'depends': ['base', 'hr', 'hr_recruitment', 'web', 'portal', 'hiredrate_dts'],
 
     # always loaded
     'data': [
