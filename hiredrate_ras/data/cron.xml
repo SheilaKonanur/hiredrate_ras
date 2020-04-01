@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data noupdate="1">
+		<record model="ir.cron" id="ir_cron_job_position_refresh">
+			<field name="name">Refresh Job Position Status</field>
+			<field name="model_id" ref="model_hr_job"/>
+			<field name="state">code</field>
+			<field name="code">model.refresh_request_cron()</field>
+			<field name="interval_number">1</field>
+			<field name="interval_type">minutes</field>
+			<field name="numbercall">-1</field>
+			<field name="doall" eval="False"/>
+		</record>
+
+		<record model="ir.cron" id="ir_cron_job_application_refresh">
+			<field name="name">Refresh Job Application Status</field>
+			<field name="model_id" ref="model_hr_applicant"/>
+			<field name="state">code</field>
+			<field name="code">model.refresh_request_cron()</field>
+			<field name="interval_number">1</field>
+			<field name="interval_type">minutes</field>
+			<field name="numbercall">-1</field>
+			<field name="doall" eval="False"/>
+		</record>
+
+		<record model="ir.cron" id="ir_cron_match_analytics_refresh">
+			<field name="name">Refresh Match Analytics Status</field>
+			<field name="model_id" ref="model_match_run_history"/>
+			<field name="state">code</field>
+			<field name="code">model.refresh_match_analytics_cron()</field>
+			<field name="interval_number">1</field>
+			<field name="interval_type">minutes</field>
+			<field name="numbercall">-1</field>
+			<field name="doall" eval="False"/>
+		</record>
+
+		<record model="ir.cron" id="ir_cron_report_refresh">
+			<field name="name">Refresh Report Status</field>
+			<field name="model_id" ref="model_hr_job"/>
+			<field name="state">code</field>
+			<field name="code">model.refresh_report_status_cron()</field>
+			<field name="interval_number">1</field>
+			<field name="interval_type">minutes</field>
+			<field name="numbercall">-1</field>
+			<field name="doall" eval="False"/>
+		</record>
+
+	</data>
+</openerp>

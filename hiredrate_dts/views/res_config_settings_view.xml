@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="res_config_cmplify_settings_view_form_inherited" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherited</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="75"/>
+            <field name="inherit_id" ref="hiredrate_dts.res_cmplify_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='account_setting']" position="after">
+                    <h2>HIREdrate DTS</h2>
+                    <div class="row o_settings_container" name="cmplify_dts_setting">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="cmplify_dts"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="cmplify_dts" string="HIREdrate DTS"/>
+                                <div class="text-muted">
+                                    Enable Template Service.
+                                </div>
+                                <div class="content-group" id="cmplify_template_ats"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row o_settings_container" name="ras_host" attrs="{'invisible': [('cmplify_dts','=', False)]}">
+                        <div class="col-12 col-lg-6 o_setting_box" id="host_dts_setting">
+                            <div class="o_setting_right_pane">
+                                <div class="row mt16">
+                                    <label class="col-lg-3" string="Host" for="dts_bridge_host"/>
+                                    <field name="dts_bridge_host" required="0"/>
+                                </div>
+                                <div class="text-muted">
+                                    Connection URL to the template service.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="template_category_view_form" model="ir.ui.view">
+            <field name="name">template.category.form</field>
+            <field name="model">template.category</field>
+            <field name="arch" type="xml">
+                <form string="Template category">
+                    <sheet>
+                            <group>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="company_id" invisible="1"/>
+                                </group>
+                            </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="template_list_view_form" model="ir.ui.view">
+            <field name="name">template.list.form</field>
+            <field name="model">template.list</field>
+            <field name="arch" type="xml">
+                <form string="Template List">
+                    <sheet>
+                            <group>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="template_category" readonly="1"/>
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="is_base_template"/>
+                                </group>
+                            </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="template_settings_view_form" model="ir.ui.view">
+            <field name="name">template.settings.form</field>
+            <field name="model">template.settings</field>
+            <field name="arch" type="xml">
+                <form string="Template Settings">
+                    <header>
+                        <button string="Trial" name="compute_print_preview" type="object" class="oe_highlight"/>
+                    </header>
+                    <sheet>
+                        <div>
+                            <label for="name"/>
+                            <h2>
+                                <field name="name" readonly="0" required="1"/>
+                            </h2>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="template_category" options="{'no_create': True, 'no_open':True}" required="1"/>
+
+                                <field name="template_id" invisible="1"/>
+                                <field name="user_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <group attrs="{'invisible': [('template_category','=', False)]}">
+                            <group>
+                                <field name="base_template_id" options="{'no_create': True, 'no_open':True}" domain="[('template_category','=', template_category)]"/>
+                            </group>
+                            <group>
+                                <field name="preview_image" widget="image"  class="oe_avatar" readonly="0" string="Preview"/>
+                            </group>
+                            <group attrs="{'invisible': [('base_template_id','=', False)]}">
+                                <field name="format_type" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Header" attrs="{'invisible': [('base_template_id','=', False)]}">
+                            <group>
+                                <field name="logo" widget="image"  class="oe_avatar" readonly="0"/>
+                            </group>
+                            <group>
+                                <label for="street" string="Address"/>
+                                    <div class="o_address_format">
+                                        <field name="street" placeholder="Street..." class="o_address_street"/>
+                                        <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                        <field name="city" placeholder="City" class="o_address_city"/>
+                                        <field name="state_id" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+                                        <field name="zip" placeholder="Postal Code" class="o_address_zip"/>
+                                        <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True}'/>
+                                    </div>
+                                <field name="phone" readonly="0"/>
+                                <field name="mobile" readonly="0"/>
+                                <field name="website" readonly="0"/>
+                            </group>
+                        </group>
+                        <group string="Add Sections" attrs="{'invisible': [('base_template_id','=', False)]}">
+                            <div>
+                                <field name="add_sections">
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="model_id" invisible="1"/>
+                                        <field name="ir_fields" domain="[('model_id', '=', model_id)]" options="{'no_create': True}" required="1"/>
+                                        <field name="styling" required="1"/>
+                                        <field name="is_optional"/>
+                                    </tree>
+                                    <form>
+                                        <group string="Add Section">
+                                            <field name="ir_fields"/>
+                                            <field name="styling"/>
+                                            <field name="is_optional"/>
+                                            <field name="sequence" invisible="1"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </div>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="template_settings_view_tree" model="ir.ui.view">
+            <field name="name">template.settings.tree</field>
+            <field name="model">template.settings</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="template_settings_action" model="ir.actions.act_window">
+            <field name="name">Templates</field>
+            <field name="res_model">template.settings</field>
+            <field name='view_type'>form</field>
+            <field name='view_mode'>tree,form</field>
+        </record>
+
+        <menuitem id="menu_template_settings" name="Templates" parent="hr_recruitment.menu_hr_recruitment_configuration" action="template_settings_action" sequence="7" groups="base.group_system"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+		<!-- Sequences for sale.order -->
+		<record id="seq_job_position" model="ir.sequence">
+			<field name="name">Job Position</field>
+			<field name="code">hr.job</field>
+			<field name="prefix">JP</field>
+			<field name="padding">3</field>
+			<field name="company_id" eval="False"/>
+		</record>
+
+		<record id="seq_job_application" model="ir.sequence">
+			<field name="name">Job Application</field>
+			<field name="code">hr.applicant</field>
+			<field name="prefix">JA</field>
+			<field name="padding">3</field>
+			<field name="company_id" eval="False"/>
+		</record>
+
+		<record id="seq_match_history" model="ir.sequence">
+			<field name="name">Match History</field>
+			<field name="code">match.run.history</field>
+			<field name="prefix">MA</field>
+			<field name="padding">3</field>
+			<field name="company_id" eval="False"/>
+		</record>
+
+	</data>
+</odoo>

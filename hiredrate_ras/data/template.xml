@@ -1,0 +1,153 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <!-- Mail template are declared in a NOUPDATE block
+         so users can freely customize/delete them -->
+    <data noupdate="1">
+        <!--Email template -->
+        <record id="email_template_match_analytic" model="mail.template">
+            <field name="name">Match Analytic: Send by email</field>
+            <field name="model_id" ref="hiredrate_ras.model_match_run_history"/>
+            <field name="partner_to">${object.company_id.partner_id.id}</field>
+            <field name="subject">Match Analytics Ranking</field>
+            <field name="body_html">
+                <![CDATA[
+                Dear ${object.company_id.name},</br>
+                <p>&nbsp;&nbsp;Please find the Match Analytics Ranking for:</p></br>
+                <p style="padding-top:5px;">&nbsp;&nbsp;&nbsp;&nbsp;<strong>Job Position: ${object.job_position_rec.name}</strong></p></br>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>Skills: ${object.job_position_skill_text}</strong></p></br>
+                <html xmlns="http://www.w3.org/1999/xhtml">
+                    <head>
+                        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                        <title>[SUBJECT]</title>
+                        <script type="colorScheme" class="swatch active">
+                            {
+                            "name":"Default",
+                            "bgBody":"3f4040",
+                            "link":"555555",
+                            "color":"000000",
+                            "bgItem":"ffffff",
+                            "title":"000000"
+                            }
+                        </script>
+
+                    </head>
+                    <body paddingwidth="0" paddingheight="0" class='bgBody' style="padding-top: 0; padding-bottom: 0; padding-top: 0; padding-bottom: 0; background-repeat: repeat; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; -webkit-font-smoothing: antialiased;" offset="0" toppadding="0" leftpadding="0">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tableContent" align="center"  style='font-family:Helvetica, sans-serif;'>
+                            <tr>
+                                <td align='center' class='movableContentContainer'>
+                                    <div class='movableContent'>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                            <!--<tr><td height='10'></td></tr>-->
+                                            <tr>
+                                                <td style="padding-top:10px;">
+                                                    <table width="600" border="0" cellspacing="0" cellpadding="0" align="center" style='border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;background-color: #2da4a8;'>
+                                                        <!--<tr><td colspan="3" height='3'></td></tr>-->
+                                                        <tr>
+                                                            <td width='20'></td>
+                                                            <td>
+                                                                <div class="contentEditableContainer contentTextEditable">
+                                                                    <div class="contentEditable">
+                                                                        <p style='font-size: 30px; text-align: center;color: #ffffff;line-height: 150%;'>Match Analytics Ranking</p>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td width='20'></td>
+                                                        </tr>
+                                                        <!--<tr><td colspan="3" height='3'></td></tr>-->
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                    <div class='movableContent'>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+                                            <!--<tr><td  height='20'></td></tr>-->
+                                            <tr>
+                                                <td>
+                                                    <table width="600" border="0" cellspacing="0" cellpadding="0" align="center">
+                                                        <tr>
+                                                            % for line in object.match_analytic_result:
+                                                                <td width='190' class='bgItem' style='border-radius:5px;-moz-border-radius:5px;-webkit-border-radius:5px;'>
+                                                                    <table width="190" height="170" border="0" cellspacing="0" cellpadding="0" align="center" >
+                                                                        <tr><td colspan="3" height='20'></td></tr>
+                                                                        <tr>
+                                                                            <td width='20'></td>
+                                                                            <td valign="top" width="175" class="specbundle" style="background-color:darkcyan;">
+                                                                                <table align="left" bgcolor="#77529E" border="0" cellpadding="0" cellspacing="0" valign="top" width="100%">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td colspan="3" height="18">
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td width="18">
+                                                                                            </td>
+                                                                                            <td width="139">
+                                                                                                <div class="contentEditableContainer contentTextEditable">
+                                                                                                    <div class="contentEditable">
+                                                                                                        <h1 class='white' style="color:#ffffff;font-size:14px;font-weight:normal;text-align:right;">Rank ${line.match_rank}</h1>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td width="18">
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td colspan="3" height="15">
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td width="18">
+                                                                                            </td>
+                                                                                            <td width="139">
+                                                                                                <div class="contentEditableContainer contentTextEditable">
+                                                                                                    <div class="contentEditable" style="text-align:left;">
+                                                                                                        <span style="color:#ffffff;font-size:18px;font-weight:normal;">Score:${line.analytic_score}%</span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td width="18">
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td bgcolor="#533474" width="18" height="10">
+                                                                                            </td>
+                                                                                            <td bgcolor="#533474" width="139">
+                                                                                                <div class="contentEditableContainer contentTextEditable" style="position:relative;">
+                                                                                                    <div class="contentEditable">
+                                                                                                        <h3 style='text-align: left;color:#ffffff;font-size:18px;font-weight:normal;text-align:left;'>${line.name}</h3></div>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td bgcolor="#533474" width="18">
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <td bgcolor="#533474" colspan="3" height="18">
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+                                                                            <td width='20'></td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            % endfor
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </body>
+                </html>
+                ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

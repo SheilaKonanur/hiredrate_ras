@@ -1,0 +1,119 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="match_run_history_form_view">
+            <field name="name">match.run.history.form</field>
+            <field name="model">match.run.history</field>
+            <field name="arch" type="xml">
+                <form string="Match History" edit="false" context="{'order_id': active_id}">
+                    <header>
+                        <button name="action_send_by_email" type='object' string='Send By Email' groups="hr_recruitment.group_hr_recruitment_user,hr_recruitment.group_hr_recruitment_manager"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,complete"/>
+                    </header>
+                    <div class="alert alert-info" role="alert" style="margin-bottom:0px;" attrs="{'invisible': ['|', ('state','=', 'draft'), ('response_status','=', '')]}">
+                        <b><field name="response_status" readonly="1"/></b>
+                    </div>
+                    <sheet>
+                        <div name="button_box" class="oe_button_box">
+                            <button class="oe_stat_button" icon="fa-file-o" name="action_view_application" type="object" string="Applications">
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                                <h1><field name="name" readonly="0"/></h1>
+                            <h2><field name="job_position_name" readonly="1"/></h2>
+                            <h2><field name="company_id" readonly="1" options="{'no_open': True}"/></h2>
+                            <field name="user_id" readonly="1" options="{'no_open': True}" invisible="1"/>
+                            <field name="job_board_ref" invisible="1"/>
+                        </div>
+                        <group>
+                            <group string="Weightage">
+                                <field name="qualification_weightage" attrs="{'readonly': [('state', 'in', ['complete', 'in_progress'])]}" invisible="1"/>
+                                <field name="skills_weightage" attrs="{'readonly': [('state', 'in', ['complete', 'in_progress'])]}" invisible="1"/>
+                                <field name="experience_weightage" attrs="{'readonly': [('state', 'in', ['complete', 'in_progress'])]}" invisible="1"/>
+                                <field name="certification_weightage" attrs="{'readonly': [('state', 'in', ['complete', 'in_progress'])]}" invisible="1"/>
+                                <field name="qualification_prior" attrs="{'readonly': [('state', 'in', ['complete', 'in_progress'])]}"/>
+                                <field name="skills_prior" attrs="{'readonly': [('state', 'in', ['complete', 'in_progress'])]}"/>
+                                <field name="experience_prior" attrs="{'readonly': [('state', 'in', ['complete', 'in_progress'])]}"/>
+                                <field name="certification_prior" attrs="{'readonly': [('state', 'in', ['complete', 'in_progress'])]}"/>
+                            </group>
+                            <group string="Required Skills">
+                                <div>
+                                    <field name="job_position_rec" invisible="1"/>
+                                    <field name="job_position_skills" widget="many2many_tags"/>
+                                    <div class="o_horizontal_separator">Applicants</div>
+                                    <field name="applications" widget="many2many_tags" options="{'no_create': True}" attrs="{'readonly': [('state', 'in', ['complete', 'in_progress'])]}"  context="{'application_ids': 1}"  domain="[('job_id', '=', job_position_rec), ('stage_id.code', '=', 'IQ'), ('analytic_status', '!=', 'IN_PROGRESS')]"/>
+                                    <div class="o_horizontal_separator" invisible="1">Resume Template</div>
+                                    <field name="application_template" invisible="1" domain="[('model', '=', 'hr.applicant')]" options="{'no_create': True}"/>
+                                </div>
+                                <field name="job_position_id" invisible="1"/>
+                                <field name="match_analytic_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <group string="Match Rank" attrs="{'invisible': [('state','!=', 'complete')]}">
+                            <div>
+                                <field name="match_analytic_result" attrs="{'invisible': [('state','!=', 'complete')]}">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="match_rank" style="text-align:left;"/>
+                                        <field name="qualification_matched"/>
+                                        <field name="skills_matched"/>
+                                        <field name="match_count"/>
+                                        <field name="compatibility_score"/>
+                                        <field name="applications" invisible="1"/>
+                                        <field name="stage_id"/>
+                                        <field name="stage_code" invisible="1"/>
+                                        <button name="open_application" type="object" string="Application" class="oe_highlight" groups="hr_recruitment.group_hr_recruitment_user,hr_recruitment.group_hr_recruitment_manager"/>
+                                        <button name="download_file" type="object" class="fa fa-download"/>
+                                        <button name="short_list_application" type="object" string="ShortList" class="oe_highlight" groups="hr_recruitment.group_hr_recruitment_user,hr_recruitment.group_hr_recruitment_manager"/>
+                                        <button name="remove_application" type="object" string="Remove" class="oe_highlight" groups="hr_recruitment.group_hr_recruitment_user,hr_recruitment.group_hr_recruitment_manager"/>
+                                    </tree>
+                                </field>
+                                <div style="text-align:center;" attrs="{'invisible': [('state','!=', 'in_progress')]}">
+                                    <h3>
+                                        <b>
+                                            Refreh to view Result.
+                                        </b>
+                                    </h3>
+                                </div>
+                            </div>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="match_run_history_tree_view" model="ir.ui.view">
+            <field name="name">match.run.history.tree</field>
+            <field name="model">match.run.history</field>
+            <field name="arch" type="xml">
+                <tree string="Match History">
+                    <field name="name"/>
+                    <field name="create_date"/>
+                    <field name="write_date"/>
+                    <field name="no_of_applications"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_match_run_history">
+            <field name="name">Match Run History</field>
+            <field name="res_model">match.run.history</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_id" ref="hiredrate_ras.match_run_history_form_view"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new Match Analytic Run!
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

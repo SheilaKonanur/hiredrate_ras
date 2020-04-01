@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="hr_recruitment.group_hr_recruitment_user" model="res.groups">
+            <field name="name">Excecutive</field>
+            <field name="category_id" ref="base.module_category_hr_recruitment"/>
+        </record>
+
+        <record id="group_hr_recruitment_stakeholder" model="res.groups">
+            <field name="name">Officer</field>
+            <field name="category_id" ref="base.module_category_hr_recruitment"/>
+            <field name="implied_ids" eval="[(4, ref('hr.group_hr_user'))]"/>
+        </record>
+
+        <record id="hr_recruitment.group_hr_recruitment_user" model="res.groups">
+            <field name="implied_ids" eval="[(4, ref('hiredrate_ras.group_hr_recruitment_stakeholder'))]"/>
+        </record>
+
+        <record id="skills_details_company_rule" model="ir.rule">
+            <field name="name">Skills Details multi company rule</field>
+            <field name="model_id" ref="model_skill_details"/>
+            <field eval="True" name="global"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+        </record>
+
+        <record id="certification_details_company_rule" model="ir.rule">
+            <field name="name">Certification Details multi company rule</field>
+            <field name="model_id" ref="model_certificate_details"/>
+            <field eval="True" name="global"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+        </record>
+
+        <record id="qualification_details_company_rule" model="ir.rule">
+            <field name="name">Qualification Details multi company rule</field>
+            <field name="model_id" ref="model_qualification_details"/>
+            <field eval="True" name="global"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+        </record>
+  </data>
+</odoo>

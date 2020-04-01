@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_template_settings_admin,template.settings.admin,model_template_settings,base.group_system,1,1,1,1
+access_add_section_admin,add.sections.admin,model_add_sections,base.group_system,1,1,1,1
+access_template_list_admin,template.list.admin,model_template_list,base.group_system,1,1,1,1
+access_template_category_admin,template.category.admin,model_template_category,,1,1,1,1

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="portal_my_analytics_result" name="Portal: My Match Analytics Result">
+        <t t-call="portal.portal_layout">
+            <t t-set="match_analytics" t-value="order"/>
+            <div id="optional_placeholder"></div>
+            <div class="container">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h4>
+                                    Match Results
+                                    <span t-esc="order.name"/>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb8">
+                            <div class="col-lg-3" style="display:inline;">
+                                <strong>Date:</strong> <span t-field="order.create_date" t-options='{"widget": "date"}'/>
+                            </div>
+                            <div class="col-lg-3" style="display:inline;">
+                                <strong>Job Position:</strong> <span t-field="order.job_position_rec.name"/>
+                            </div>
+                            <div class="col-lg-6" style="display:inline;">
+                                <strong>Job Position Skills:</strong> <t t-if="order.job_position_skills"><span t-field="order.job_position_skill_text"/></t>
+                            </div>
+                        </div>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <strong>Applicant</strong>
+                            </div>
+                            <div class="col-lg-2">
+                                <strong>Qualification</strong>
+                            </div>
+                            <div class="col-lg-4">
+                                <strong>Skills Matched</strong>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <strong>Match Analytics Score(%)</strong>
+                            </div>
+                            <div class="col-lg-1">
+                                <strong>Rank</strong>
+                            </div>
+                        </div>
+                        <t t-foreach="order.match_analytic_result" t-as="ol">
+                            <div class="row purchases_vertical_align">
+                                <div class="col-lg-2">
+                                    <span t-field="ol.name"/>
+                                </div>
+                                <div class="col-lg-2">
+                                    <span t-esc="ol.qualification_matched"/>
+                                </div>
+                                <div class="col-lg-4">
+                                    <span t-esc="ol.skills_matched"/>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <span t-field="ol.analytic_score"/>
+                                </div>
+                                <div class="col-lg-1">
+                                    <span t-esc="ol.match_rank"/>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                    <div style="padding-top:25px; text-align:center;">
+                        <span>Please <a href="/web/login">Sign in</a> to view more details for Match Analytics</span>
+                    </div>
+                </div>
+            </div>
+            <div class="oe_structure mb32"/>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,381 @@
+<odoo>
+  <data>
+      <record id="view_hr_job_form_inherited" model="ir.ui.view">
+          <field name="name">hr.job.form.inherited</field>
+          <field name="model">hr.job</field>
+          <field name="inherit_id" ref="hr.view_hr_job_form" />
+          <field name="arch" type="xml">
+                <xpath expr="/form/sheet//field[@name='no_of_recruitment']" position="after">
+                    <field name="job_ref_id"/>
+<!--                    <field name="average_closing_recruitment"/>-->
+                    <field name="cmplify_position" invisible="1"/>
+                    <field name="is_form_fill" invisible="1"/>
+                </xpath>
+                <xpath expr="//form/header/button[@name='set_open']" position="replace">
+                    <button name="set_open" string="Stop Recruitment" states="recruit" type="object" groups="hr_recruitment.group_hr_recruitment_user,hr_recruitment.group_hr_recruitment_manager"/>
+                </xpath>
+                <xpath expr="//form/sheet" position="before">
+                    <div class="alert alert-info" role="alert" style="margin-bottom:0px;" attrs="{'invisible': ['|',('response_status','=', ''),('response_status','=', False)]}">
+                        <b><field name="response_status" readonly="1"/></b>
+                    </div>
+                    <field name="response_status" invisible="1"/>
+                </xpath>
+                <xpath expr="//form/sheet" position="inside">
+                    <div style="padding-top:15px;" attrs="{'invisible': [('cmplify_position','=', False)]}">
+                        <hr/>
+                    </div>
+                    <div class="o_horizontal_separator" style="padding-top:5px; font-size:27px;" attrs="{'invisible': [('cmplify_position','=', False)]}">HIREdrate RAS
+                    <button class="oe_stat_button oe_right oe_highlight" type="object" name="action_reset_form" string="Reset" groups="hr_recruitment.group_hr_recruitment_user,hr_recruitment.group_hr_recruitment_manager"/>
+                    </div>
+                    <div class="row" style="padding-left:32px;" attrs="{'invisible': [('cmplify_position','=', False)]}">
+                        <div style="width:550px;">
+                            <div class="row">
+                                <label for="parse_required" string="Autofill" style="width:152px;"/>
+                                <div>
+                                    <field name="parse_required" style="width:360px;" readonly="0"/>
+                                </div>
+                                <div style="padding-left:5px;">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="analytic_status" style="width:152px;"/>
+                                <div>
+                                    <field name="analytic_status" style="width:360px;" readonly="1"/>
+                                </div>
+                                <div style="padding-left:5px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="padding-left:32px; margin-top:25px;" attrs="{'invisible': [('cmplify_position','=', False)]}">
+                        <div style="width:550px;">
+                            <div class="row">
+                                <label for="skills" style="width:152px;"/>
+                                <div>
+                                    <field name="skills" widget="many2many_tags" attrs="{'readonly': [('analytic_status','=', 'IN_PROGRESS')]}" style="width:360px;"/>
+                                </div>
+                                <div style="padding-left:5px;">
+                                    <button style="color:#7C7BAD;background-color:transparent; font-size:16px; border:0px; padding:0px;" class="btn-sm fa fa-external-link" type="object" name="skill_fetch" groups="hr_recruitment.group_hr_recruitment_user,hr_recruitment.group_hr_recruitment_manager"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="certifications" style="width:152px;"/>
+                                <div>
+                                    <field name="certifications" widget="many2many_tags" attrs="{'readonly': [('analytic_status','=', 'IN_PROGRESS')]}" style="width:360px;"/>
+                                </div>
+                                <div style="padding-left:5px;">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding-left:5px;">
+                            <div class="row">
+                                <label for="qualification" style="width:152px;"/>
+                                <div>
+                                    <field name="qualification" widget="many2many_tags" attrs="{'readonly': [('analytic_status','=', 'IN_PROGRESS')]}" style="width:360px;"/>
+                                </div>
+                                <div style="padding-left:5px;">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="min_exp" style="width:152px;"/>
+                                <div style="max-width:360px;">
+                                    <field name="min_exp" attrs="{'readonly': [('analytic_status','=', 'IN_PROGRESS')]}"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="max_exp" style="width:152px;"/>
+                                <div style="max-width:360px;">
+                                    <field name="max_exp" attrs="{'readonly': [('analytic_status','=', 'IN_PROGRESS')]}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="o_horizontal_separator" style="padding-top:5px;" attrs="{'invisible': ['|', ('cmplify_position','=', False), ('submit_match_analytic','=', False)]}">Match Analytics</div>
+                    <div class="row" style="padding-left:32px;" attrs="{'invisible': ['|', ('cmplify_position','=', False), ('submit_match_analytic','=', False)]}">
+                        <div style="width:550px;">
+                            <div class="row">
+                                <label for="submit_match_analytic" style="width:152px;"/>
+                                <div>
+                                    <field name="submit_match_analytic" style="width:360px;" readonly="1"/>
+                                </div>
+                                <div style="padding-left:5px;">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="model" style="width:152px; font-weight:bold;"/>
+                                <div>
+                                    <field name="model" style="width:360px;" readonly="1"/>
+                                </div>
+                                <div style="padding-left:5px;">
+                                    <button style="color:#7C7BAD;background-color:transparent; font-size:16px; border:0px; padding:0px;" class="btn-sm fa fa-external-link" type="object" name="model_fetch" groups="hr_recruitment.group_hr_recruitment_user,hr_recruitment.group_hr_recruitment_manager"/>
+                                </div>
+                            </div>
+                            <field name="job_position_id" invisible="1" readonly="1"/>
+                            <field name="hr_job" invisible="1" readonly="1"/>
+                            <field name="match_analytics_ids" invisible="1"/>
+                        </div>
+                    </div>
+              </xpath>
+              <xpath expr="/form/header" position="inside">
+                  <button name="refresh_request" string="Refresh" type="object" class="oe_highlight" groups="hr_recruitment.group_hr_recruitment_user,hr_recruitment.group_hr_recruitment_manager"/>
+              </xpath>
+          </field>
+      </record>
+
+      <!-- Extending the current job position view for adding form part. -->
+      <record id="view_hr_job_survey_inherited" model="ir.ui.view">
+          <field name="name">hr.job.form1.inherited</field>
+          <field name="model">hr.job</field>
+          <field name="inherit_id" ref="hr_recruitment.hr_job_survey" />
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='address_id']" position="attributes">
+                   <attribute name="required">1</attribute>
+              </xpath>
+              <xpath expr="//div[@name='button_box']" position="inside">
+            		<button class="oe_stat_button" type="object" name="action_match_analysis" icon="fa-file-text-o" attrs="{'invisible': ['|', ('submit_match_analytic', '=', False), ('cmplify_position', '=', False)]}">
+                    	<div class="o_field_widget o_stat_info">
+                        	<span class="o_stat_text">Match Analysis</span>
+                    	</div>
+                	</button>
+
+              </xpath>
+              <xpath expr="//div[@name='button_box']/button[@name='%(hr_recruitment.action_hr_job_no_employee)d']" position="replace">
+                   <button class="oe_stat_button" icon="fa-users" name="%(hr_recruitment.action_hr_job_no_employee)d" type="action" groups="hr_recruitment.group_hr_recruitment_user,hr_recruitment.group_hr_recruitment_manager">
+                       <field name="no_of_employee" widget="statinfo" string="Employees"/>
+                   </button>
+              </xpath>
+              <xpath expr="//div[@name='button_box']/button[@name='action_get_attachment_tree_view']" position="attributes">
+                  <attribute name="groups">hr_recruitment.group_hr_recruitment_user,hr_recruitment.group_hr_recruitment_manager</attribute>
+              </xpath>
+              <xpath expr="//div[@name='button_box']/button[@name='%(hr_recruitment.action_hr_job_sources)d']" position="replace">
+                   <button class="oe_stat_button" type="action" name="%(hr_recruitment.action_hr_job_sources)d" icon="fa-share" context="{'default_job_id': active_id}" groups="hr_recruitment.group_hr_recruitment_user,hr_recruitment.group_hr_recruitment_manager">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Trackers</span>
+                        </div>
+                </button>
+              </xpath>
+              <xpath expr="//field[@name='user_id']" position="attributes">
+                   <attribute name="required">1</attribute>
+              </xpath>
+          </field>
+      </record>
+
+      <!-- Job Position Kanban View -->
+
+      <record id="hr_recruitment.view_hr_job_kanban" model="ir.ui.view">
+        <field name="name">hr.job.kanban</field>
+        <field name="model">hr.job</field>
+        <field name="arch" type="xml">
+            <kanban class="oe_background_grey o_kanban_dashboard o_hr_recruitment_kanban" on_create="hr_recruitment.create_job_simple">
+                <field name="name"/>
+                <field name="alias_name"/>
+                <field name="alias_domain"/>
+                <field name="department_id"/>
+                <field name="no_of_recruitment"/>
+                <field name="color"/>
+                <field name="no_of_hired_employee"/>
+                <field name="manager_id"/>
+                <field name="state"/>
+                <field name="user_id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div t-attf-class="#{kanban_color(record.color.raw_value)}">
+                                <div t-attf-class="o_kanban_card_header">
+                                    <div class="o_kanban_card_header_title">
+                                        <div class="o_primary"><t t-esc="record.name.value"/></div>
+                                        <div t-if="record.alias_name.value and record.alias_domain.value and record.state.raw_value == 'recruit'" class="o_secondary o_job_alias">
+                                            <small> <i class="fa fa-envelope-o" role="img" aria-label="Alias" title="Alias"></i> <field name="alias_id"/> </small>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_manage_button_section">
+                                        <a class="o_kanban_manage_toggle_button" href="#"><i class="fa fa-ellipsis-v" role="img" aria-label="Manage" title="Manage"/></a>
+                                    </div>
+                                </div>
+                                <div class="container o_kanban_card_content">
+                                    <t t-if="record.state.raw_value == 'recruit'">
+                                        <div class="row">
+                                            <div name="application_button" class="col-6 o_kanban_primary_left">
+                                                <button class="btn btn-primary" name="%(hr_recruitment.action_hr_job_applications)d" type="action">Application(s)</button>
+                                            </div>
+                                        </div>
+                                        <div name="kanban_boxes" class="row o_recruitment_kanban_boxes">
+                                            <div class="o_recruitment_kanban_box o_kanban_primary_bottom bottom_block">
+                                                <a name="action_get_attachment_tree_view" type="object">
+                                                    <span title='Documents'><i class='fa fa-book' role="img" aria-label="Documents"/>
+                                                    </span>
+                                                </a>
+                                            </div>
+                                            <div class="o_recruitment_kanban_box o_kanban_primary_bottom bottom_block">
+                                                <span>
+                                                    <field name="no_of_hired_employee"/>
+                                                     Hired Employees
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </t>
+                                    <t t-if="record.state.raw_value == 'open'">
+                                        <div class="row">
+                                            <div class="col-12 o_kanban_primary_left">
+                                                <button class="btn btn-secondary" name="set_recruit" type="object">Start Recruitment</button>
+                                            </div>
+                                        </div>
+                                    </t>
+                                </div><div class="container o_kanban_card_manage_pane dropdown-menu" role="menu">
+                                    <div t-if="widget.editable" class="o_kanban_card_manage_settings row">
+                                        <div class="col-8" role="menuitem" aria-haspopup="true">
+                                            <ul class="oe_kanban_colorpicker" data-field="color" role="menu"/>
+                                        </div>
+                                        <div class="col-4">
+                                            <a role="menuitem" t-if="record.state.raw_value == 'recruit'" name="set_open" type="object">Recruitment Done</a>
+                                            <a role="menuitem" t-if="record.state.raw_value == 'open'" name="set_recruit" type="object">Start recruitment</a>
+                                            <br role="separator"/>
+                                            <a role="menuitem" name="edit_job" type="edit">Edit</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+     <!-- Certification Form View. -->
+
+    <record model="ir.ui.view" id="certificate_details_form">
+        <field name="name">certificate.details.form</field>
+        <field name="model">certificate.details</field>
+        <field name="arch" type="xml">
+            <form string="Certificate Details">
+                <group>
+                    <field name="name"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Skill Form View. -->
+
+    <record model="ir.ui.view" id="skill_details_form">
+        <field name="name">skill.details.form</field>
+        <field name="model">skill.details</field>
+        <field name="arch" type="xml">
+            <form string="Skill Details">
+                <group>
+                    <field name="name"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+      <record model="ir.actions.act_window" id="action_skill_view">
+            <field name="name">Skill</field>
+            <field name="res_model">skill.details</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">list,form</field>
+            <field name="view_id" ref="hiredrate_ras.skill_details_form"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create new Skill!
+                </p>
+            </field>
+        </record>
+
+      <record model="ir.ui.view" id="model_details_form">
+        <field name="name">model.details.form</field>
+        <field name="model">model.details</field>
+        <field name="arch" type="xml">
+            <form string="Model Details">
+                <group>
+                    <field name="name"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+   <!-- Qualification Form View. -->
+
+    <record model="ir.ui.view" id="qualification_details_form">
+        <field name="name">qualification.details.form</field>
+        <field name="model">qualification.details</field>
+        <field name="arch" type="xml">
+            <form string="Qualification Details">
+                <group>
+                    <field name="name"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+      <record id="hr_recruitment_stage_form_inherited" model="ir.ui.view">
+          <field name="name">hr.recruitment.stage.form.inherited</field>
+          <field name="model">hr.recruitment.stage</field>
+          <field name="inherit_id" ref="hr_recruitment.hr_recruitment_stage_form" />
+          <field name="arch" type="xml">
+              <xpath expr="//form/group//field[@name='fold']" position="before">
+                   <field name="code"/>
+              </xpath>
+          </field>
+      </record>
+
+      <menuitem name="Recruitment" id="hr_recruitment.menu_hr_recruitment_root" groups="hr_recruitment.group_hr_recruitment_user,group_hr_recruitment_stakeholder" sequence="80"/>
+
+      <record id="view_job_filter_inherited" model="ir.ui.view">
+            <field name="name">hr.job.search.inherited</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_job_filter" />
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="inside">
+                    <field name="match_analytics_ids"/>
+                </xpath>
+
+            </field>
+      </record>
+
+        <record id="analytic_view_pivot" model="ir.ui.view">
+             <field name="name">match.run.pivot</field>
+             <field name="model">hr.job</field>
+             <field name="arch" type="xml">
+                 <pivot string="Recruitment Analysis" disable_linking="True">
+                     <field name="match_analytics_ids"/>
+                     <field name="name" type="row"/>
+                     <field name="app_cnt" type="measure" string="Application Count"/>
+                     <field name="match_cnt" type="measure"/>
+                     <field name="average_closing_recruitment" type="measure"/>
+                     <field name="average_shortlisted" type="measure"/>
+                 </pivot>
+             </field>
+        </record>
+
+        <record id="analytic_view_graph" model="ir.ui.view">
+             <field name="name">match.run.graph</field>
+             <field name="model">hr.job</field>
+             <field name="arch" type="xml">
+                 <graph string="Recruitment Analysis">
+                     <field name="name" type="row"/>
+                     <field name="match_cnt" type="col"/>
+                     <field name="average_closing_recruitment" type="col"/>
+                     <field name="average_shortlisted" type="col"/>
+                 </graph>
+             </field>
+        </record>
+
+        <record id="analytics_action_analysis" model="ir.actions.act_window">
+            <field name="name">Analytics Analysis</field>
+            <field name="res_model">hr.job</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">graph,pivot</field>
+            <field name="search_view_id" ref="hr.view_job_filter"/>
+            <field name="view_ids" eval="[
+                (5, 0, 0),
+                (0, 0, {'view_mode': 'pivot', 'view_id': ref('analytic_view_pivot')}),
+                (0, 0, {'view_mode': 'graph', 'view_id': ref('analytic_view_graph')})]"/>
+            <field name="context">{}</field>  <!-- force empty -->
+        </record>
+
+        <menuitem name="Reports" id="report_analytics" parent="hr_recruitment.menu_hr_recruitment_root" sequence="99" action="analytics_action_analysis"/>
+
+  </data>
+</odoo>

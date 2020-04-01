@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_layout">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+
+        <div class="header">
+            <div class="row">
+                <div class="col-2">
+                    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 100px; max-width:110px;" alt="Logo"/>
+                </div>
+                <div class="col-8 text-center">
+                    <div style="font-family:'Calibri (Body)'; font-size:13px; color:blue;">
+                        <t t-if="company.street"><span t-esc="company.street"/></t>
+                        <t t-if="company.street2">, <span t-esc="company.street2"/></t>
+                        <t t-if="company.city">, <span t-esc="company.city"/></t>
+                        <t t-if="company.state_id">, <span t-esc="company.state_id.name"/></t>
+                        <t t-if="company.zip">, <span t-esc="company.zip"/></t>
+                        <br/>
+                        <t t-if="company.phone"><span>Office:</span><span t-esc="company.phone"/></t>
+                            <span>Fax:(248) 440-2338</span>
+                        <t t-if="company.website"><span t-esc="company.website"/></t>
+                    </div>
+                    <div style="font-family:'Times New Roman', Times, serif; font-size:13px; padding-top:15px;">
+                        <t t-foreach="docs" t-as="o">
+                            <t t-if="o.partner_name"><span t-esc="o.partner_name" style="font-weight:bold;"/></t>
+                        </t>
+                    </div>
+                </div>
+                <div class="col-2 text-right">
+                </div>
+            </div>
+        </div>
+        <t t-raw="0"/>
+        <div class="footer o_boxed_footer">
+            <div class="text-center">
+                <div t-field="company.report_footer"/>
+                <div t-if="report_type == 'pdf'" style="padding-top:5px;">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="custom_paskon_layout">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+
+        <t t-if="not company">
+            <!-- Multicompany -->
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+
+        <div class="header">
+            <div class="row" style="background-color:#1e275a;">
+                <p/>
+            </div>
+            <div class="row">
+                <img src="/hiredrate_ras/static/description/paskon.png" style="height:50px; padding-top:4px;"/>
+            </div>
+            <div class="row" style="background-color:#E6E9ED; height:135px;">
+                <t t-foreach="docs" t-as="o">
+                    <div class="row" style="width:100%; padding-top:10px;">
+                        <div style="width:70%;">
+                            <table width="100%">
+                                <tr>
+                                    <td width="5%"/>
+                                    <td style="padding:20px; font-family: 'Roboto';">
+                                        <h3 t-esc="o.job_id.name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="5%"/>
+                                    <td style="padding-left:20px; font-family: 'Roboto';">
+                                        <span t-esc="o.partner_name.upper()"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+
+            </div>
+        </div>
+        <t t-raw="0"/>
+        <div class="footer">
+            <div class="text-center">
+                <div t-field="company.report_footer"/>
+                <div t-if="report_type == 'pdf'" style="padding-top:5px;">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
+            <div class="row" style="background-color:#1e275a;">
+                <p/>
+            </div>
+        </div>
+    </template>
+
+</odoo>

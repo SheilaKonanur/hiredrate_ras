@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_skill_wizard" model="ir.ui.view">
+            <field name="name">skill.wizard.form</field>
+            <field name="model">skill.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Skill">
+                    <div>
+                        <field name="skill_id"/>
+                    </div>
+                    <group>
+                        <field name="job_position_id" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button string='Confirm' name="skill_fetch_action" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_skill_wizard" model="ir.actions.act_window">
+            <field name="name">Skill</field>
+            <field name="res_model">skill.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_skill_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

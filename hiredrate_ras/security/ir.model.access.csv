@@ -1,0 +1,26 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_certificate_details,certificate_details,model_certificate_details,,1,1,1,1
+access_skill_details,skill_details,model_skill_details,,1,1,1,1
+access_model_details,model_details,model_model_details,,1,1,1,1
+access_qualification_details,qualification_details,model_qualification_details,,1,1,1,1
+access_employment_details,employment_details,model_employment_details,,1,1,1,1
+access_educational_details,educational_details,model_educational_details,,1,1,1,1
+access_qual_name,qual_name,model_qual_name,,1,1,1,1
+access_qual_major,qual_major,model_qual_major,,1,1,1,1
+access_match_analytic_stake,match_analytic_stake,model_match_analytic,hiredrate_ras.group_hr_recruitment_stakeholder,1,0,0,0
+access_match_analytic_executive,match_analytic_executive,model_match_analytic,hr_recruitment.group_hr_recruitment_user,1,1,1,0
+access_match_analytic_manager,match_analytic_manager,model_match_analytic,hr_recruitment.group_hr_recruitment_manager,1,1,1,1
+access_match_run_history_manager,match_history_manager,model_match_run_history,hr_recruitment.group_hr_recruitment_manager,1,1,1,1
+access_match_run_history_officer,match_history_officer,model_match_run_history,hr_recruitment.group_hr_recruitment_user,1,1,1,0
+access_match_run_history_stake,match_history_stake,model_match_run_history,hiredrate_ras.group_hr_recruitment_stakeholder,1,0,0,0
+access_match_run_history_portal,match.run.history.portal,model_match_run_history,base.group_portal,1,0,0,0
+access_job_position_user,job.position.user,model_hr_job,group_hr_recruitment_stakeholder,1,0,0,0
+access_job_application_user,job.application.user,model_hr_applicant,group_hr_recruitment_stakeholder,1,0,0,0
+hr_recruitment.access_hr_applicant_user,hr.applicant.user,model_hr_applicant,hr_recruitment.group_hr_recruitment_user,1,1,1,0
+access_hr_applicant_manager,hr.applicant.manager,model_hr_applicant,hr_recruitment.group_hr_recruitment_manager,1,1,1,1
+hr.access_hr_job_user,hr.job user,model_hr_job,,1,0,0,0
+access_hr_job_executive,hr.job executive,model_hr_job,hr_recruitment.group_hr_recruitment_user,1,1,0,0
+access_hr_job_manager,hr.job manager,model_hr_job,hr_recruitment.group_hr_recruitment_manager,1,1,1,1
+hr_recruitment.access_hr_recruitment_stage_manager,hr.recruitment.stage.manager,model_hr_recruitment_stage,hr_recruitment.group_hr_recruitment_manager,1,1,1,1
+access_hr_recruitment_stage_stake,hr.recruitment.stage.stake,model_hr_recruitment_stage,group_hr_recruitment_stakeholder,1,0,0,0
+hr_recruitment.access_hr_recruitment_stage_user,hr.recruitment.stage.user,model_hr_recruitment_stage,hr_recruitment.group_hr_recruitment_user,1,1,1,0

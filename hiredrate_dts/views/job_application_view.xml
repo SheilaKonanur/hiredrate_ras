@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="crm_case_template_form_view_job" model="ir.ui.view">
+            <field name="name">Jobs Recruitment Form Inherited</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.crm_case_form_view_job"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/header" position="inside">
+                    <button string="Export" name="print_resume" class="oe_highlight" type="object"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_cmplify_settings_view_form_inherited" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherited</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="75"/>
+            <field name="inherit_id" ref="hiredrate_registry.res_cmplify_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='account_setting']" position="after">
+                    <h2>HIREdrate RAS</h2>
+                    <div class="row o_settings_container" name="recruitment_auto_fill">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="cmplify_recruitment"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="cmplify_recruitment" string="HIREdrate RAS"/>
+                                <div class="text-muted">
+                                    Enable Match Analytic Service.
+                                </div>
+                                <div class="content-group" id="cmplify_recruitment_ats"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" attrs="{'invisible': [('cmplify_recruitment','=', False)]}">
+                            <div class="o_setting_left_pane">
+                                <field name="job_position_parsing"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="job_position_parsing" string="Job Position"/>
+                                <div class="text-muted">
+                                    Auto Fill the job position with parsed values.
+                                </div>
+                                <div class="content-group" id="job_position_autofill"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" attrs="{'invisible': [('cmplify_recruitment','=', False)]}">
+                            <div class="o_setting_left_pane">
+                                <field name="job_application_parsing"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="job_application_parsing" string="Job Application"/>
+                                <div class="text-muted">
+                                    Auto Fill the job application with parsed values.
+                                </div>
+                                <div class="content-group" id="job_application_autofill"/>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" attrs="{'invisible': [('cmplify_recruitment','=', False)]}">
+                            <div class="o_setting_left_pane">
+                                <field name="match_analytic"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="match_analytic" string="Match Analytics"/>
+                                <div class="text-muted">
+                                    Enable Match Analytic service.
+                                </div>
+                                <div class="content-group" id="match_analytic_service"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row o_settings_container"  name="ras_host" attrs="{'invisible': [('cmplify_recruitment','=', False)]}">
+                        <div class="col-12 col-lg-6 o_setting_box" id="host_setting">
+                            <div class="o_setting_right_pane">
+                                <div class="row mt16">
+                                    <label class="col-lg-3" string="Host" for="ras_bridge_host"/>
+                                    <field name="ras_bridge_host" required="0"/>
+                                </div>
+                                <div class="text-muted">
+                                    Connection URL to the RAS service.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

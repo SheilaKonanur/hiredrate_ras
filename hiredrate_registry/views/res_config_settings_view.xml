@@ -1,0 +1,68 @@
+<odoo>
+    <record id="res_cmplify_config_settings_view_form" model="ir.ui.view">
+        <field name="name">HIREdrate Configuration</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="cmPlify" string="HIREdrate Settings" data-key="hiredrate_registry">
+                    <h2>Account Configurations</h2>
+                    <div class="row o_settings_container" id="account_setting">
+                        <div class="col-12  o_setting_box" id="api_action_setting">
+                            <button name="link_existing_company" type="object" string="Link existing Company" class="btn btn-primary" icon="fa-link"/>
+<!--                            <button name="reset_api_key" type="object" string="Reset Api Key" class="ml-2 btn btn-secondary" icon="fa-refresh"/>-->
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="api_setting">
+                            <div class="o_setting_right_pane">
+                                <div class="row mt16">
+                                    <label class="col-lg-3 o_light_label" string="Customer Id" for="customer_id"/>
+                                    <field name="customer_id" required="0"/>
+                                </div>
+                                <div class="row">
+                                    <label class="col-lg-3 o_light_label" for="client_id"/>
+                                    <field name="client_id"/>
+                                </div>
+                                <div class="row">
+                                    <label class="col-lg-3 o_light_label" for="api_key_id"/>
+                                    <field name="api_key_id"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box" id="company_settings" groups="">
+                            <div class="o_setting_right_pane">
+                                <label string="Company" for="cmplify_company_id"/>
+                                <span class="fa fa-lg fa-globe" title="Values set here are website-specific." groups=""/>
+                                <div class="text-muted">
+                                    The company this website belongs to
+                                </div>
+                                <field name="cmplify_company_id" readonly="1"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <div class="row">
+                                    <label class="col-lg-3" for="customer_host"/>
+                                    <field name="customer_host"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hiredrate_settings_action" model="ir.actions.act_window">
+        <field name="name">HIREdrate Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'hiredrate_registry'}</field>
+    </record>
+
+    <menuitem id="recruitment_configuration"
+        name="HIREdrate Settings"
+        parent="hr_recruitment.menu_hr_recruitment_configuration"
+        sequence="0"
+        action="hiredrate_settings_action"
+        groups="base.group_system"/>
+</odoo>

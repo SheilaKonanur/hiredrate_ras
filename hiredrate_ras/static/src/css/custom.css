@@ -1,0 +1,126 @@
+.btn-form-filling {
+    padding-top:10px;
+    text-align:center;
+}
+
+.recommended {
+    color: #a9a9a9
+}
+
+body {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin:0 !important;
+    width: 100% !important;
+    -webkit-text-size-adjust: 100% !important;
+    -ms-text-size-adjust: 100% !important;
+    -webkit-font-smoothing: antialiased !important;
+}
+.tableContent img {
+    border: 0 !important;
+    display: inline-block !important;
+    outline: none !important;
+}
+
+p, h1,h2,h3,ul,ol,li,div{
+    margin:0;
+    padding:0;
+}
+h1,h2{
+    font-weight: normal;
+    background:transparent !important;
+    border:none !important;
+}
+
+td,table{
+    vertical-align: top;
+}
+td.middle{
+    vertical-align: middle;
+}
+
+a{
+    text-decoration: none;
+}
+
+a.link1{
+    font-size: 16px;
+    color: #a5a5a5;
+}
+
+a.link2{
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+    text-decoration: underline;
+}
+
+a.link3{
+    font-size: 15px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #2da4a8;
+    padding: 11px 15px;
+    text-decoration: none;
+    border-radius:5px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    text-align: center;
+    display:inline-block;
+}
+
+.contentEditable li{
+
+}
+
+h1{
+    font-size: 24px;
+    font-weight: bold;
+    color: #000000;
+    line-height: 150%;
+}
+
+
+h2{
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000;
+    line-height: 150%;
+    height:60px;
+}
+
+p{
+    font-size: 16px;
+    color: #000000;
+    line-height: 150%;
+    text-align: left;
+}
+
+.bgItem{
+background: #ffffff;
+}
+
+.bgBody{
+background: #3f4040;
+}
+
+.panel {
+    margin-bottom: 0px !important;
+    background-color: ;
+    border: 1px solid ;
+    border-radius: 4px;
+    -webkit-box-shadow: ;
+    box-shadow: ;
+}
+
+
+.panel>.panel-body {
+    padding: 15px 22px;
+    height: 100%;
+}
+.image_size > img {
+    height: 90px;
+    width: 90px;
+ }

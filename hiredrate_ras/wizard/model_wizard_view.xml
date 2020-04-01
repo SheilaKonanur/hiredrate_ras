@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_model_wizard" model="ir.ui.view">
+            <field name="name">model.wizard.form</field>
+            <field name="model">model.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Model List">
+                    <group>
+                        <field name="model_id" options="{'no_create': True}"/>
+                        <field name="job_position_id" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button string='Confirm' name="model_fetch_action" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_model_wizard" model="ir.actions.act_window">
+            <field name="name">Pick the best model to run</field>
+            <field name="res_model">model.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_model_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+
+    </data>
+</odoo>

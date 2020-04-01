@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_print_wizard" model="ir.ui.view">
+            <field name="name">print.wizard.form</field>
+            <field name="model">print.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Resume Template Preview">
+                    <group>
+                        <group>
+                            <field name="is_application" invisible="1"/>
+                            <field name="template_settings" readonly="1"/>
+                            <field name="job_position_id" options="{'no_create': True, 'no_open': True}" attrs="{'invisible': [('is_application','=', True)]}" required="1"/>
+                            <field name="job_application_id" domain="[('job_id','=', job_position_id)]" options="{'no_create': True, 'no_open': True}" attrs="{'invisible': [('is_application','=', True)]}" required="1"/>
+                            <field name="output_filename" invisible="1"/>
+                            <field name="output_filedata" filename="output_filename" attrs="{'invisible': ['|', ('job_application_id','=', False), ('is_application','=', False)]}" readonly="1"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button string='Resume Download' name="get_stock_file" type="object" class="btn-primary"/>
+                        <button string="Close" class="btn-secondary" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="action_print_wizard" model="ir.actions.act_window">
+            <field name="name">Resume Template Preview</field>
+            <field name="res_model">print.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_print_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_application">
+        <t t-call="web.html_container">
+            <t t-call="hiredrate_ras.custom_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page" style="">
+                        <hr/>
+                        <div style="padding-top:5px;">
+                            <span style="font-weight:bold; text-decoration: underline; font-size:14px;">SUMMARY</span>
+                            <p style="font-size:13px;"><t t-esc="o.report_objective"/></p>
+                        </div>
+
+                        <div style="padding-top:7px;">
+                            <span style="font-weight:bold; text-decoration: underline; font-size:14px;">SKILLS</span>
+                            <t t-if="skills">
+                                <div>
+                                    <span style="font-size:13px;" t-esc="skills"/>
+                                </div>
+                            </t>
+                            <t t-if="not skills">
+                                <div>
+                                    <span>None</span>
+                                </div>
+                            </t>
+                        </div>
+                        <div style="padding-top:5px;">
+                            <span style="font-weight:bold; text-decoration: underline; font-size:14px;">EDUCATION</span>
+                            <t t-if="education">
+
+                                <t t-foreach="education" t-as="edu">
+                                    <div style="padding-top:5px;">
+                                        <table class="table table-bordered" style="font-size:13px;" width="100%">
+                                            <tr>
+                                                <td width="30%">
+                                                    <span style="text-align:left;"><t t-if="edu['degree']">Degree: <t t-esc="edu['degree']"/></t></span>
+                                                </td>
+                                                <td width="40%"/>
+                                                <td width="30%" style="text-align:right;">
+                                                    <strong><span style="text-align:right;"><t t-if="edu['start_name']"><t t-esc="edu['start_name']"/>, </t><t t-if="edu['start_year']"><t t-esc="edu['start_year']"/></t></span> - <span><t t-if="edu['end_name']"><t t-esc="edu['end_name']"/>, </t><t t-if="edu['end_year']"><t t-esc="edu['end_year']"/></t></span></strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%">
+                                                    <span style="text-align:left;"><t t-if="edu['qual_name']">Qualification: <t t-esc="edu['qual_name']"/></t></span>
+                                                </td>
+                                                <td width="40%"/>
+                                                <td width="30%"/>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%">
+                                                    <span style="text-align:left;"><t t-if="edu['qual_major']">Qualification Major: <t t-esc="edu['qual_major']"/></t></span>
+                                                </td>
+                                                <td width="40%"/>
+                                                <td width="30%"/>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%">
+                                                    <span style="text-align:left;"><t t-if="edu['name']">School Type: <t t-esc="edu['name']"/></t></span>
+                                                </td>
+                                                <td width="40%"/>
+                                                <td width="30%"/>
+                                            </tr>
+                                            <tr>
+                                                <td width="30%">
+                                                    <span style="text-align:left;"><t t-if="edu['university']">School University: <t t-esc="edu['university']"/></t></span>
+                                                </td>
+                                                <td width="40%"/>
+                                                <td width="30%"/>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </t>
+                            </t>
+                            <t t-if="not education">
+                                <div>
+                                    <span>None</span>
+                                </div>
+                            </t>
+                        </div>
+                        <div style="padding-top:7px;">
+                            <span style="font-weight:bold; text-decoration: underline; font-size:14px;">WORK EXPERIENCE</span>
+                            <t t-if="employment">
+                                <t t-foreach="employment" t-as="emp">
+                                    <div style="padding-top:5px;">
+                                        <table class="table table-bordered" style="font-size:13px;" width="100%">
+                                            <tr>
+                                                <td width="50%">
+                                                    <span style="text-align:left;"><t t-if="emp['company']"><strong><t t-esc="emp['company']"/></strong></t></span>
+                                                </td>
+                                                <td width="20%"/>
+                                                <td width="30%" style="text-align:right;">
+                                                    <strong><span style="text-align:right;"><t t-if="emp['start_name']"><t t-esc="emp['start_name']"/>, </t><t t-if="emp['start_year']"><t t-esc="emp['start_year']"/></t></span> - <span><t t-if="emp['end_name']"><t t-esc="emp['end_name']"/>, </t><t t-if="emp['end_year']"><t t-esc="emp['end_year']"/></t></span></strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="50%">
+                                                    <span style="text-align:left;"><t t-if="emp['position']"><strong>Position: <t t-esc="emp['position']"/></strong></t></span>
+                                                </td>
+                                                <td width="20%"/>
+                                                <td width="30%"/>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" width="100%">
+                                                    <p style="text-align:left;"><t t-if="emp['description']"><t t-esc="emp['description']"/></t></p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </t>
+                            </t>
+                            <t t-if="not employment">
+                                <div>
+                                    <span>None</span>
+                                </div>
+                            </t>
+                        </div>
+                        <div style="padding-top:7px;">
+                            <span style="font-weight:bold; text-decoration: underline; font-size:14px;">CERTIFICATIONS</span>
+                            <t t-if="certifications">
+                                <div>
+                                    <table class="table table-bordered" style="font-size:13px;" width="100%">
+                                        <t t-foreach="certifications" t-as="certifi">
+                                            <tr>
+                                                <td>
+                                                    <li>
+                                                        <span t-esc="certifi"/>
+                                                    </li>
+                                                </td>
+                                            </tr>
+
+                                        </t>
+                                    </table>
+                                </div>
+                            </t>
+                            <t t-if="not certifications">
+                                <div>
+                                    <span>None</span>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_application_paskon">
+        <t t-call="web.html_container">
+            <t t-call="hiredrate_ras.custom_paskon_layout">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page" style="padding-top:40px;">
+                        <div>
+                            <h3>RESUME OBJECTIVE</h3>
+                            <hr/>
+                            <p style="font-size:13px;"><t t-esc="o.report_objective"/></p>
+                        </div>
+                        <div>
+                            <h3>SKILLS</h3>
+                            <hr/>
+                            <t t-if="o.skills">
+                                <table width="100%">
+                                    <t t-set="cnt" t-value="0"/>
+                                    <tr width="100%">
+                                        <t t-foreach="o.skills" t-as="skill">
+                                            <t t-set="cnt" t-value="cnt + 1"/>
+                                            <t t-if="(cnt%7 == 0)">
+                                                <tr/>
+                                            </t>
+                                            <t t-if="(cnt%7 != 0)">
+                                                <td style="background-color:#909ba6; border: 1px solid #708090; border-radius: 5px; padding:3px; padding-top:5px; text-align:center;">
+                                                    <span t-esc="skill.name.title()"/>
+                                                </td>
+                                            </t>
+                                        </t>
+                                    </tr>
+                                </table>
+                            </t>
+                            <t t-if="not o.skills">
+                               <span> None </span>
+                            </t>
+
+                        </div>
+                        <div>
+                            <h3>EXPERIENCE</h3>
+                            <hr/>
+                            <t t-if="employment">
+                                <t t-foreach="employment" t-as="employ">
+                                    <div>
+                                        <strong><t t-esc="employ['position'].upper()"/></strong>
+                                        <p style="font-family: 'Open Sans'; font-style: italic; font-size:16px;">
+                                            <t t-esc="employ['company']"/>/<t t-esc="employ['start_name']"/> <t t-esc="employ['start_year']"/> - <t t-esc="employ['end_name']"/> <t t-esc="employ['end_year']"/>
+                                        </p>
+                                        <p style="font-family: 'Open Sans'; font-size:14px;">
+                                            <t t-if="employ['description']"><t t-esc="employ['description']"/></t>
+                                        </p>
+                                    </div>
+                                </t>
+                            </t>
+                            <t t-if="not employment">
+                               <span> None </span>
+                            </t>
+                        </div>
+                        <div>
+                            <h3>EDUCATION</h3>
+                            <hr/>
+                            <t t-if="education">
+                                <div>
+                                    <table width="100%">
+                                        <t t-set="count" t-value="0"/>
+                                        <tr width="100%">
+                                            <t t-foreach="education" t-as="edu">
+                                                <t t-set="count" t-value="count + 1"/>
+                                                <t t-if="(count%4 == 0)">
+                                                    <tr/>
+                                                </t>
+                                                <td width="33.33%">
+                                                    <table style="font-family: 'Open Sans'; font-size:14px;">
+                                                        <tr>
+                                                            <td>
+                                                               <span style="margin-bottom:0px; font-weight:bolder;"><t t-esc="edu['qual_name']"/> <t t-esc="edu['qual_major']"/></span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                               <span style="line-height: 15px; margin-bottom:0px;"><t t-esc="edu['name']"/></span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <span style="margin-bottom:0px;"><t t-esc="edu['university']"/></span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <span style="margin-bottom:0px;"><t t-if="edu['start_name']"><t t-esc="edu['start_name']"/> <t t-esc="edu['start_year']"/> - </t><t t-if="edu['end_name']"><t t-esc="edu['end_name']"/> <t t-esc="edu['end_year']"/></t></span>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </t>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </t>
+                            <t t-if="not education">
+                               <span> None </span>
+                            </t>
+                        </div>
+                        <div>
+                            <h3>CERTIFICATION</h3>
+                            <hr/>
+                            <t t-if="certifications">
+                                <div>
+                                    <table class="table table-bordered" style="font-family: 'Open Sans'; font-size:14px;" width="100%">
+                                        <t t-foreach="certifications" t-as="certifi">
+                                            <tr>
+                                                <td>
+                                                    <li>
+                                                        <span t-esc="certifi"/>
+                                                    </li>
+                                                </td>
+                                            </tr>
+
+                                        </t>
+                                    </table>
+                                </div>
+                            </t>
+                            <t t-if="not certifications">
+                               <span> None </span>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
